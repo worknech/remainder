@@ -6,8 +6,11 @@ from tkinter import simpledialog as sd
 
 import pygame
 
+t = 0
+
 
 def set():
+    global t
     rem = sd.askstring('Время напоминания', 'Введите время напоминания ыв формате ЧЧ:ММ (в 24 часовом формате)')
     try:
         hour = int(rem.split(':')[0])
@@ -20,6 +23,20 @@ def set():
         print(t)
     except Exception as e:
         mb.showerror('Ошибка!', f'Произошла ошибка {e}')
+
+
+def check():
+    global t
+    if t:
+        now = time.time()
+        if now >= t:
+            play_snd()
+            t = 0
+    root.after(10000, check)
+
+
+def play_snd():
+    pass
 
 
 root = Tk()
