@@ -9,7 +9,7 @@ import pygame
 t = 0
 
 
-def set():
+def set_t():
     global t
     rem = sd.askstring('Время напоминания', 'Введите время напоминания ыв формате ЧЧ:ММ (в 24 часовом формате)')
     try:
@@ -36,7 +36,9 @@ def check():
 
 
 def play_snd():
-    pass
+    pygame.mixer.init()
+    pygame.mixer.music.load('remainder.mp3')
+    pygame.mixer.music.play()
 
 
 root = Tk()
@@ -45,7 +47,8 @@ root.title('Напоминание')
 label = Label(text='Установите напоминание')
 label.pack(pady=10)
 
-set_button = Button(text='Установить напоминание', command=set)
+set_button = Button(text='Установить напоминание', command=set_t)
 set_button.pack()
 
+check()
 root.mainloop()
