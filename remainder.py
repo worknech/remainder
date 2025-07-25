@@ -7,6 +7,7 @@ from tkinter import simpledialog as sd
 import pygame
 
 t = 0
+music = False
 
 
 def set_t():
@@ -36,9 +37,19 @@ def check():
 
 
 def play_snd():
+    global music
+    music = True
     pygame.mixer.init()
     pygame.mixer.music.load('remainder.mp3')
     pygame.mixer.music.play()
+
+
+def stop_music():
+    global music
+    if music:
+        pygame.mixer.music.stop()
+        music = False
+    label.config(text='Установить новое напоминание')
 
 
 root = Tk()
@@ -48,7 +59,10 @@ label = Label(text='Установите напоминание', font=('Arial',
 label.pack(pady=10)
 
 set_button = Button(text='Установить напоминание', command=set_t)
-set_button.pack()
+set_button.pack(pady=10)
+
+stop_button = Button(text='Остановить музыку', command=stop_music)
+stop_button.pack(pady=10)
 
 check()
 root.mainloop()
